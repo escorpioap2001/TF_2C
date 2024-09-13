@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ayuntamiento-mongo-volume
+  namespace: trabajo-final
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ayuntamiento-mongo-storage
+  hostPath:
+    path: /mnt/data/ayuntamiento-mongo

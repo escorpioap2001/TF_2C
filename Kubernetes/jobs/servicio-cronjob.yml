@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: servicio-cronjob
+  namespace: trabajo-final
+spec:
+  schedule: "*/1 * * * *"  # Este cronjob se ejecuta cada 1 minutos. Ajusta esto según sea necesario.
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: aggregate-data
+            image: curlimages/curl:7.78.0  # Usa una imagen de curl
+            env:
+            - name: INGRESS_PORT
+              value: "31155"  # Reemplaza PUERTO con el valor obtenido anteriormente
+            - name: AUTH_TOKEN
+              value: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTRVJWSUNJTyIsInJvbGVzIjpbIkVTVEFDSU9OIl0sImlzcyI6IkdhdGVXYXkiLCJleHAiOjE3MTkyMTAyOTh9.bWDWG0DScfoowauQO8LsekxeRV6Xn2jFnwckyQa2x3s"
+            command: ["/bin/sh", "-c"]
+            args:
+            - |
+              curl -H "Authorization: $AUTH_TOKEN" http://192.168.56.3:$INGRESS_PORT/ayuntamiento/aggregateData
+          restartPolicy: OnFailure

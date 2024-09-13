@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: estaciones-repomongo-deployment
+  namespace: trabajo-final
+  labels:
+    app: estaciones-repomongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: estaciones-repomongo
+  template:
+    metadata:
+      labels:
+        app: estaciones-repomongo
+    spec:
+      containers:
+        - name: spring-app
+          image: zyeraix/estaciones-repo-mongo:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: cloud
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1

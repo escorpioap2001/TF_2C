@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aparcamientos-repomysql-deployment
+  namespace: trabajo-final
+  labels:
+    app: aparcamientos-repomysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aparcamientos-repomysql
+  template:
+    metadata:
+      labels:
+        app: aparcamientos-repomysql
+    spec:
+      containers:
+        - name: spring-app
+          image: zyeraix/aparcamientos-repo-sql:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: cloud
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1

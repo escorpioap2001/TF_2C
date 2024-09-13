@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: aparcamientos-mysql
+  namespace: trabajo-final
+  labels:
+    app: aparcamientos-mysql
+spec:
+  containers:
+    - name: aparcamientos-mysql
+      image: mysql/mysql-server:8.0.32
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: twcam23$
+        - name: MYSQL_DATABASE
+          value: parkingdb
+        - name: MYSQL_USER
+          value: user
+        - name: MYSQL_PASSWORD
+          value: twcam23$
+      ports:
+        - containerPort: 3306
+      volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+        - name: init-script
+          mountPath: /docker-entrypoint-initdb.d
+  volumes:
+    - name: mysql-persistent-storage
+      persistentVolumeClaim:
+        claimName: aparcamientos-mysql-volume-claim
+    - name: init-script
+      configMap:
+        name: aparcamientos-mysql-init-script
+  restartPolicy: Never

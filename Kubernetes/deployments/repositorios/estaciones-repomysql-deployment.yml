@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: estaciones-repomysql-deployment
+  namespace: trabajo-final
+  labels:
+    app: estaciones-repomysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: estaciones-repomysql
+  template:
+    metadata:
+      labels:
+        app: estaciones-repomysql
+    spec:
+      containers:
+        - name: spring-app
+          image: zyeraix/estaciones-repo-sql:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: cloud
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
