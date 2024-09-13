@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "repoParking.sql.url",
+    "type": "java.lang.String",
+    "description": "A description for 'repoParking.sql.url'"
+  },
+  {
+    "name": "repoParking.nosql.url",
+    "type": "java.lang.String",
+    "description": "A description for 'repoParking.nosql.url'"
+  }
+]}

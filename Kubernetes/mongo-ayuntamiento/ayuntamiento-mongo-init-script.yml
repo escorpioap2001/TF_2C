@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ayuntamiento-mongo-init-script
+  namespace: trabajo-final
+data:
+  init.js: |
+    db = db.getSiblingDB('ayuntamientodb');
+    if (!db.getCollectionNames().includes('ayuntamiento')) {
+      db.ayuntamiento.insertOne({
+        "timeStamp": ISODate('2024-05-25T11:30:25.310Z'),
+        "aggregatedData": [
+           {
+              "id_parking": 1,
+              "average_bikes_available": 45.5,
+              "airQuality": {
+                 "nitricOxides": 10.5,
+                 "nitrogenDioxides": 5.2,
+                 "VOCs_NMHC": 6.8,
+                 "PM2_5": 7.1
+              }
+           },
+           {
+              "id_parking": 2,
+              "average_bikes_available": 55.6,
+              "airQuality": {
+                 "nitricOxides": 11.2,
+                 "nitrogenDioxides": 6.5,
+                 "VOCs_NMHC": 7.3,
+                 "PM2_5": 8.0
+              }
+           }
+        ]
+     });
+    }

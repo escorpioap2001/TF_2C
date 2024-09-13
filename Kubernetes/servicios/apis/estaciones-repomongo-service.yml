@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: estaciones-repomongo-service
+  namespace: trabajo-final
+spec:
+  type: ClusterIP
+  selector:
+    app: estaciones-repomongo
+  ports:
+    - port: 80
+      targetPort: 80

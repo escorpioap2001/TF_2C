@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aparcamientos-repomongo-deployment
+  namespace: trabajo-final
+  labels:
+    app: aparcamientos-repomongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aparcamientos-repomongo
+  template:
+    metadata:
+      labels:
+        app: aparcamientos-repomongo
+    spec:
+      containers:
+        - name: spring-app
+          image: zyeraix/aparcamientos-repo-mongo:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: cloud
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1

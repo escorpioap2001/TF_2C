@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: estaciones-mongo-init-script
+  namespace: trabajo-final
+data:
+  init.js: |
+    db = db.getSiblingDB('stationdb');
+    if (!db.getCollectionNames().includes('station')) {
+      db.station.insertMany([
+        {
+          "id_station": "S1",
+          "timestamp": ISODate('2024-05-25T11:30:25.310Z'),
+          "nitricOxides": 10.5,
+          "nitrogenDioxides": 5.2,
+          "VOCs_NMHC": 6.8,
+          "PM2_5": 7.1
+        },
+        {
+          "id_station": "S2",
+          "timestamp": ISODate('2024-05-25T11:30:25.310Z'),
+          "nitricOxides": 11.2,
+          "nitrogenDioxides": 6.5,
+          "VOCs_NMHC": 7.3,
+          "PM2_5": 8.0
+        },
+        {
+          "id_station": "S3",
+          "timestamp": ISODate('2024-05-25T11:30:25.310Z'),
+          "nitricOxides": 9.8,
+          "nitrogenDioxides": 4.7,
+          "VOCs_NMHC": 5.9,
+          "PM2_5": 6.5
+        },
+        {
+          "id_station": "S4",
+          "timestamp": ISODate('2024-05-25T11:30:25.310Z'),
+          "nitricOxides": 12.3,
+          "nitrogenDioxides": 7.0,
+          "VOCs_NMHC": 8.2,
+          "PM2_5": 9.1
+        },
+        {
+          "id_station": "S5",
+          "timestamp": ISODate('2024-05-25T11:30:25.310Z'),
+          "nitricOxides": 9.5,
+          "nitrogenDioxides": 4.2,
+          "VOCs_NMHC": 6.0,
+          "PM2_5": 6.8
+        }
+      ]);
+    }

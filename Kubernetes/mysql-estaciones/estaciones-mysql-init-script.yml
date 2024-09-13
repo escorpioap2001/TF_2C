@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: estaciones-mysql-init-script
+  namespace: trabajo-final
+data:
+  init.sql: |
+    -- Station database
+    CREATE DATABASE IF NOT EXISTS stationdb;
+    USE stationdb;
+
+    CREATE TABLE IF NOT EXISTS station (
+        id VARCHAR(255) PRIMARY KEY,
+        direction VARCHAR(255),
+        latitude FLOAT,
+        longitude FLOAT
+    );
+    
+    -- Inserta datos en la tabla station solo si no existen
+    INSERT INTO station (id, direction, latitude, longitude) 
+    SELECT 'S1', 'Calle Alcala', 40.4203, -3.6949 WHERE NOT EXISTS (SELECT 1 FROM station WHERE id = 'S1');
+    INSERT INTO station (id, direction, latitude, longitude) 
+    SELECT 'S2', 'Paseo de Recoletos', 40.4224, -3.6922 WHERE NOT EXISTS (SELECT 1 FROM station WHERE id = 'S2');
+    INSERT INTO station (id, direction, latitude, longitude) 
+    SELECT 'S3', 'Plaza de Espanya', 40.4232, -3.7126 WHERE NOT EXISTS (SELECT 1 FROM station WHERE id = 'S3');
+    INSERT INTO station (id, direction, latitude, longitude)
+    SELECT 'S4', 'Parque del Retiro', 40.4139, -3.6838 WHERE NOT EXISTS (SELECT 1 FROM station WHERE id = 'S4');
+    INSERT INTO station (id, direction, latitude, longitude) 
+    SELECT 'S5', 'Calle Mayor', 40.4155, -3.7082 WHERE NOT EXISTS (SELECT 1 FROM station WHERE id = 'S5');
+    
+    -- Grant privileges
+    GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;
+    FLUSH PRIVILEGES;

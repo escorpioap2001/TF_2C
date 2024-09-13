@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ayuntamiento-mongo-service
+  namespace: trabajo-final
+spec:
+  type: ClusterIP
+  selector:
+    app: ayuntamiento-mongo
+  ports:
+    - port: 27017
+      targetPort: 27017
