@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-api-service
+  namespace: trabajo-final
+spec:
+  type: ClusterIP
+  selector:
+    app: seguridad-api
+  ports:
+    - port: 80
+      targetPort: 80

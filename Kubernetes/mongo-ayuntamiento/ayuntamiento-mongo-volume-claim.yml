@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ayuntamiento-mongo-volume-claim
+  namespace: trabajo-final
+spec:
+  storageClassName: ayuntamiento-mongo-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

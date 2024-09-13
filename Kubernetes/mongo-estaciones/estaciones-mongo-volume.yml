@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: estaciones-mongo-volume
+  namespace: trabajo-final
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: estaciones-mongo-storage
+  hostPath:
+    path: /mnt/data/estaciones-mongo

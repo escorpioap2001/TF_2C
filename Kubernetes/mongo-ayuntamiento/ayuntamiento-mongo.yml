@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ayuntamiento-mongo
+  namespace: trabajo-final
+  labels:
+    app: ayuntamiento-mongo
+spec:
+  containers:
+    - name: ayuntamiento-mongodb
+      image: mongo:4.4
+      ports:
+        - containerPort: 27017
+      volumeMounts:
+        - name: mongo-persistent-storage
+          mountPath: /data/db
+        - name: init-script
+          mountPath: /docker-entrypoint-initdb.d
+  volumes:
+    - name: mongo-persistent-storage
+      persistentVolumeClaim:
+        claimName: ayuntamiento-mongo-volume-claim
+    - name: init-script
+      configMap:
+        name: ayuntamiento-mongo-init-script
+  restartPolicy: Never

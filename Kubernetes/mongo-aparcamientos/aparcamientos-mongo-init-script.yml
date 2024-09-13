@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aparcamientos-mongo-init-script
+  namespace: trabajo-final
+data:
+  init.js: |
+    db = db.getSiblingDB('parkingdb');
+    if (!db.getCollectionNames().includes('parking')) {
+      db.parking.insertMany([
+        {
+          "id_parking": "P1",
+          "operation": "rent",
+          "bikesAvailable": 50,
+          "freeParkingSpots": 20,
+          "timestamp": ISODate('2024-05-25T11:30:25.310Z')
+        },
+        {
+          "id_parking": "P2",
+          "operation": "rent",
+          "bikesAvailable": 45,
+          "freeParkingSpots": 25,
+          "timestamp": ISODate('2024-05-25T11:30:25.310Z')
+        },
+        {
+          "id_parking": "P3",
+          "operation": "return",
+          "bikesAvailable": 60,
+          "freeParkingSpots": 10,
+          "timestamp": ISODate('2024-05-25T11:30:25.310Z')
+        },
+        {
+          "id_parking": "P4",
+          "operation": "rent",
+          "bikesAvailable": 70,
+          "freeParkingSpots": 5,
+          "timestamp": ISODate('2024-05-25T11:30:25.310Z')
+        },
+        {
+          "id_parking": "P5",
+          "operation": "return",
+          "bikesAvailable": 90,
+          "freeParkingSpots": 15,
+          "timestamp": ISODate('2024-05-25T11:30:25.310Z')
+        }
+      ]);
+    }
