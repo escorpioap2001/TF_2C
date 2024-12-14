@@ -1,0 +1,13 @@
+package es.uv.yeagapalpu;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class TrabajoFinalParkingRepNoSqlApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
